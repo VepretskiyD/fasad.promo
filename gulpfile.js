@@ -20,7 +20,7 @@ var path = {
     fonts: 'build/fonts/'
   },
   src: {
-    html: 'src/*.html',
+    html: 'src/**/*.html',
     js: 'src/js/*.js',
     style: 'src/css/style.scss',
     img: 'src/img/*.*',
