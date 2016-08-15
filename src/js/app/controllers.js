@@ -9,16 +9,19 @@ angular.module('app').controller('MainMenuController', function ($scope, $rootSc
   $scope.closeThis = function () {
     $scope.showMenu = false;
     $scope.closeDropdowns = true;
+    // console.log('close this', $scope.closeDropdowns);
   };
   $scope.isActive = function (page) {
     var currentLocation = $location.path();
-    if (currentLocation == page) {
+    var currentRoute = $rootScope.currentOriginalPath;
+    if (currentLocation == page || currentRoute == page) {
       return true;
     } else {
       return false;
     };
   };
   $rootScope.$watch('currentPath', function (val) {
+    // console.log('path is changed');
     $scope.showMenu = false;
     $scope.closeDropdowns = true;
   })
@@ -27,6 +30,18 @@ angular.module('app').controller('HomeController', function ($scope) {
 
 });
 angular.module('app').controller('AboutController', function ($scope) {
+
+});
+angular.module('app').controller('WhyUsController', function ($scope) {
+
+});
+angular.module('app').controller('TechnologyController', function ($scope) {
+
+});
+angular.module('app').controller('GalleryController', function ($scope) {
+
+});
+angular.module('app').controller('ContactsController', function ($scope) {
 
 });
 

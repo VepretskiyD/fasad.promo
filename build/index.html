@@ -3,12 +3,14 @@
     <head>
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="fragment" content="!" />
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Fasad promo</title>
         <link rel="stylesheet" href="css/style.css">
     </head>
     <body>
         <!-- {{currentPath}} -->
+        <!-- {{closeDropdowns}} -->
         <div class="header__wrapper">
             <header class="header" ng-controller="MainMenuController">
                 <div class="header__main">
@@ -20,30 +22,33 @@
                 <nav class="header__nav" id="main-menu" click-outside="closeThis()" outside-if-not="toggle-button" ng-class="{'header__nav--show': showMenu, 'header__nav--hide': !showMenu}" watch-dropdowns>
                     <ul class="menu">
                         <li class="menu__item">
-                            <a href="#/" class="menu__item__link" ng-class="{'menu__item__link--active': isActive('/')}">Главная</a>
+                            <a href="#/" class="menu__item__link" ng-class="{'menu__item__link--active': isActive('/')}">Головна</a>
                         </li>
                         <li class="menu__item">
-                            <a href="#/about" class="menu__item__link" ng-class="{'menu__item__link--active': isActive('/about')}">Кто мы</a>
+                            <a href="#/about" class="menu__item__link" ng-class="{'menu__item__link--active': isActive('/about')}">Про нас</a>
                         </li>
                         <li class="menu__item menu__item__dropdown menu__item__dropdown--close">
-                            <a href="" class="menu__item__link" menu-dropdown>Наша специализация</a>
+                            <a href="" class="menu__item__link" menu-dropdown ng-class="{'menu__item__link--active': isActive('/technology/:techId')}">Технології</a>
                             <ul>
                                 <li class="menu__item">
-                                    <a href="#/technology1" class="menu__item__link" ng-class="{'menu__item__link--active': isActive('/technology1')}">Специализация №1</a>
+                                    <a href="#/technology/glass" class="menu__item__link" ng-class="{'menu__item__link--active': isActive('/technology/glass')}">Скляні конструкції</a>
                                 </li>
                                 <li class="menu__item menu__item__dropdown menu__item__dropdown--close">
-                                  <a href="#/technology2" class="menu__item__link" ng-class="{'menu__item__link--active': isActive('/technology2')}">Специализация №2</a>
+                                  <a href="#/technology/facade" class="menu__item__link" ng-class="{'menu__item__link--active': isActive('/technology/facade')}">Фасадні конструкції</a>
+                                </li>
+                                <li class="menu__item menu__item__dropdown menu__item__dropdown--close">
+                                  <a href="#/technology/vent" class="menu__item__link" ng-class="{'menu__item__link--active': isActive('/technology/vent')}">Вентильовані фасади</a>
                                 </li>
                             </ul>
                         </li>
                         <li class="menu__item">
-                            <a href="#/why_us" class="menu__item__link" ng-class="{'menu__item__link--active': isActive('/why_us')}">Почему мы</a>
+                            <a href="#/why_us" class="menu__item__link" ng-class="{'menu__item__link--active': isActive('/why_us')}">Чому ми</a>
                         </li>
                         <li class="menu__item">
-                            <a href="#/gallery" class="menu__item__link" ng-class="{'menu__item__link--active': isActive('/gallery')}">Галерея объектов</a>
+                            <a href="#/gallery" class="menu__item__link" ng-class="{'menu__item__link--active': isActive('/gallery')}">Галерея об'єктів</a>
                         </li>
                         <li class="menu__item">
-                            <a href="#/contacts" class="menu__item__link" ng-class="{'menu__item__link--active': isActive('/contacts')}">Контакты</a>
+                            <a href="#/contacts" class="menu__item__link" ng-class="{'menu__item__link--active': isActive('/contacts')}">Контакти</a>
                         </li>
                     </ul>
                 </nav>

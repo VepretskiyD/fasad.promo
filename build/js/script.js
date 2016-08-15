@@ -444,12 +444,18 @@ n&&(l[m.name]=n)}q=l}else q=null;else q=null;q=a=q}q&&(b=t(c,{params:d.extend({}
 })();
 ;
 angular.module('app', ['ngRoute', 'angular-click-outside']);
-angular.module('app').run(function ($rootScope) {
-  $rootScope.$on('$routeChangeSuccess', function (event, current, previous, reject, $location) {
+angular.module('app').run(function ($rootScope, $location) {
+  $rootScope.$on('$routeChangeSuccess', function (event, current, previous, reject) {
+    // console.log(current);
     if(current.$$route) {
-      $rootScope.currentPath = current.$$route.originalPath;
+      $rootScope.currentOriginalPath = current.$$route.originalPath;
+      $rootScope.currentPath = $location.path();
     }
   });
+  // $rootScope.$on('$locationChangeSuccess', function (event, next, current) {
+    // $rootScope.currentPath = next;
+    // console.log('location changed ', $location.path());
+  // })
 });
 angular.module('app').config(['$routeProvider', function ($routeProvide) {
   $routeProvide.
@@ -460,6 +466,25 @@ angular.module('app').config(['$routeProvider', function ($routeProvide) {
     when('/about', {
       templateUrl: 'template/about.html',
       controller: 'AboutController'
+    }).
+    when('/why_us', {
+      templateUrl: 'template/why_us.html',
+      controller: 'WhyUsController'
+    }).
+    when('/technology/:techId', {
+      templateUrl: 'template/technology.html',
+      controller: 'TechnologyController'
+    }).
+    when('/technology', {
+      redirectTo: '/'
+    }).
+    when('/gallery', {
+      templateUrl: 'template/gallery.html',
+      controller: 'GalleryController'
+    }).
+    when('/contacts', {
+      templateUrl: 'template/contacts.html',
+      controller: 'ContactsController'
     }).
     when('/404', {
       templateUrl: 'template/404.html',
@@ -481,16 +506,19 @@ angular.module('app').controller('MainMenuController', function ($scope, $rootSc
   $scope.closeThis = function () {
     $scope.showMenu = false;
     $scope.closeDropdowns = true;
+    // console.log('close this', $scope.closeDropdowns);
   };
   $scope.isActive = function (page) {
     var currentLocation = $location.path();
-    if (currentLocation == page) {
+    var currentRoute = $rootScope.currentOriginalPath;
+    if (currentLocation == page || currentRoute == page) {
       return true;
     } else {
       return false;
     };
   };
   $rootScope.$watch('currentPath', function (val) {
+    // console.log('path is changed');
     $scope.showMenu = false;
     $scope.closeDropdowns = true;
   })
@@ -501,6 +529,18 @@ angular.module('app').controller('HomeController', function ($scope) {
 angular.module('app').controller('AboutController', function ($scope) {
 
 });
+angular.module('app').controller('WhyUsController', function ($scope) {
+
+});
+angular.module('app').controller('TechnologyController', function ($scope) {
+
+});
+angular.module('app').controller('GalleryController', function ($scope) {
+
+});
+angular.module('app').controller('ContactsController', function ($scope) {
+
+});
 
 angular.module('app').controller('ErrorPageController', function ($scope) {
 
@@ -509,6 +549,7 @@ angular.module('app').controller('ErrorPageController', function ($scope) {
 angular.module('app').directive('menuDropdown', function() {
   return {
     link: function(scope, elem, attrs) {
+      var dropdowns = document.querySelectorAll('#main-menu .menu__item__dropdown');
       elem.on('click', function(e) {
         e.preventDefault();
         elem.parent().toggleClass('menu__item__dropdown--close');
@@ -521,13 +562,16 @@ angular.module('app').directive('watchDropdowns', function() {
     link: function(scope, elem, attrs) {
       scope.$watch('closeDropdowns', function(value) {
         var dropdowns = document.querySelectorAll('#main-menu .menu__item__dropdown');
+        // console.log('closeDropdowns fired', value);
         if (value) {
           for (var i = 0; i < dropdowns.length; i++) {
+            // console.log('switch off');
             if (!angular.element(dropdowns[i]).hasClass('menu__item__dropdown--close')) {
               angular.element(dropdowns[i]).addClass('menu__item__dropdown--close');
             }
           }
           scope.closeDropdowns = false;
+          // console.log('turned to false', scope.closeDropdowns);
         }
       });
     }
