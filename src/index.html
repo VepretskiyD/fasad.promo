@@ -9,18 +9,9 @@
         <link rel="stylesheet" href="css/style.css">
     </head>
     <body>
-      <!-- <pre>showmenu {{showMenu}}</pre> -->
-      <!-- <pre>isopened {{isOpenedDropdown}}</pre> -->
-        <!-- {{currentPath}} -->
-        <!-- {{closeDropdowns}} -->
         <div class="header__wrapper">
             <header class="header" ng-controller="MainMenuController">
                 <div class="header__main">
-                  <div ng-class="{'green': showMenu, 'red': !showMenu}">showmenu</div>
-
-                  <div ng-class="{'green': isOpenedDropdown, 'red': !isOpenedDropdown}">openedDropdown</div>
-                  <div ng-class="{'green': closeDropdowns, 'red': !closeDropdowns}">closeDropdowns</div>
-
                     <div class="logo"><a href="#/"><img src="img/logo.png" alt=""></a></div>
                     <button class="menu__toggle" id="toggle-button" ng-init="showMenu = false; closeDropdowns = false; isOpenedDropdown = false" ng-click="toggleMenu()">
                         <i class="fa fa-bars" aria-hidden="true"></i>
