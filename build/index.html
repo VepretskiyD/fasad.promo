@@ -54,7 +54,16 @@
                 </nav>
             </header>
         </div>
-        <ng-view></ng-view>
+        <div class="main-content__wrapper">
+          <div class="main-content">
+            <ng-view></ng-view>
+          </div>
+        </div>
+        <div class="footer__wrapper">
+          <footer class="footer">
+            <p class="footer__copy">Copyright &copy Fasad Promo 2016</p>
+          </footer>
+        </div>
         <script src="js/script.js"></script>
     </body>
 </html>

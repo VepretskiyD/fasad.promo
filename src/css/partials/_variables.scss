@@ -1,29 +1,40 @@
-$ff-title: Montserrat, sans-serif;
+// $ff-title: Montserrat, sans-serif;
 $ff-header-menu: Arial, sans-serif;
-$ff-content: "Roboto Light", sans-serif;
-$red: #ff4e50;
-$grey: #ccc;
-%font-title_bold {
-  font-family: $ff-title;
-  font-weight: bold;
-}
-%font-title_bold--white {
-  font-family: $ff-title;
-  font-weight: bold;
-  color: white;
-}
-%font-title_bold--black {
-  font-family: $ff-title;
-  font-weight: bold;
-  color: #333;
-}
+$fz-main: 14px;
+// $ff-content: "Roboto Light", sans-serif;
+// $red: #ff4e50;
+// $grey: #ccc;
+$header-nav-main: #3f51b5;
+$header-nav-main-border: #7986cb;
+$header-nav-main-btn-toggle: #c5cae9;
+$header-nav-main-grey-alfa: rgba(0, 0, 0, 0.2);
+$white: #fff;
+$white-alfa: rgba(255, 255, 255, 0.7);
+$header-nav-main-subm-hover: #f5f5f5;
+$grey-text: #262626;
+// %font-title_bold {
+//   font-family: $ff-title;
+//   font-weight: bold;
+// }
+// %font-title_bold--white {
+//   font-family: $ff-title;
+//   font-weight: bold;
+//   color: white;
+// }
+// %font-title_bold--black {
+//   font-family: $ff-title;
+//   font-weight: bold;
+//   color: #333;
+// }
 $header-height: 50px;
-$header-nav-bp-w: 700px;
+$footer-height: 50px;
+$main-min-width: 320px;
 %main-container-width {
-  min-width: 320px;
+  min-width: $main-min-width;
   max-width: 1200px;
   margin: 0 auto;
 }
+$header-nav-bp-w: 700px;
 @mixin header-nav-bp {
   @media screen and (min-width: $header-nav-bp-w) {
     @content;
