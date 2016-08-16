@@ -2,14 +2,19 @@ angular.module('app').controller('MainMenuController', function ($scope, $rootSc
   $scope.toggleMenu = function () {
     $scope.showMenu = !$scope.showMenu;
     if (!$scope.showMenu) {
-      $scope.closeDropdowns = true;
+      $scope.closeThis();
+      // $scope.closeDropdowns = true;
     }
   }
-  $scope.closeDropdowns = false;
+  // $scope.closeDropdowns = false;
+  // $scope.isOpenedDropdown = false;
   $scope.closeThis = function () {
-    $scope.showMenu = false;
-    $scope.closeDropdowns = true;
-    // console.log('close this', $scope.closeDropdowns);
+    if ($scope.isOpenedDropdown || $scope.showMenu) {
+
+      $scope.showMenu = false;
+      $scope.closeDropdowns = true;
+      // console.log('close this', $scope.closeDropdowns);
+    }
   };
   $scope.isActive = function (page) {
     var currentLocation = $location.path();
@@ -22,8 +27,9 @@ angular.module('app').controller('MainMenuController', function ($scope, $rootSc
   };
   $rootScope.$watch('currentPath', function (val) {
     // console.log('path is changed');
-    $scope.showMenu = false;
-    $scope.closeDropdowns = true;
+    // $scope.showMenu = false;
+    $scope.closeThis();
+    // $scope.closeDropdowns = true;
   })
 });
 angular.module('app').controller('HomeController', function ($scope) {

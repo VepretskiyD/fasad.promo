@@ -499,14 +499,19 @@ angular.module('app').controller('MainMenuController', function ($scope, $rootSc
   $scope.toggleMenu = function () {
     $scope.showMenu = !$scope.showMenu;
     if (!$scope.showMenu) {
-      $scope.closeDropdowns = true;
+      $scope.closeThis();
+      // $scope.closeDropdowns = true;
     }
   }
-  $scope.closeDropdowns = false;
+  // $scope.closeDropdowns = false;
+  // $scope.isOpenedDropdown = false;
   $scope.closeThis = function () {
-    $scope.showMenu = false;
-    $scope.closeDropdowns = true;
-    // console.log('close this', $scope.closeDropdowns);
+    if ($scope.isOpenedDropdown || $scope.showMenu) {
+
+      $scope.showMenu = false;
+      $scope.closeDropdowns = true;
+      // console.log('close this', $scope.closeDropdowns);
+    }
   };
   $scope.isActive = function (page) {
     var currentLocation = $location.path();
@@ -519,8 +524,9 @@ angular.module('app').controller('MainMenuController', function ($scope, $rootSc
   };
   $rootScope.$watch('currentPath', function (val) {
     // console.log('path is changed');
-    $scope.showMenu = false;
-    $scope.closeDropdowns = true;
+    // $scope.showMenu = false;
+    $scope.closeThis();
+    // $scope.closeDropdowns = true;
   })
 });
 angular.module('app').controller('HomeController', function ($scope) {
@@ -548,10 +554,19 @@ angular.module('app').controller('ErrorPageController', function ($scope) {
 ;
 angular.module('app').directive('menuDropdown', function() {
   return {
+    // scope: {
+    //   isOpenedDropdown: '='
+    // },
+    restrict: 'A',
     link: function(scope, elem, attrs) {
-      var dropdowns = document.querySelectorAll('#main-menu .menu__item__dropdown');
+      // var dropdowns = document.querySelectorAll('#main-menu .menu__item__dropdown');
       elem.on('click', function(e) {
         e.preventDefault();
+        if (elem.parent().hasClass('menu__item__dropdown--close')) {
+          scope.isOpenedDropdown = true;
+          // scope.$apply;
+          // console.log('opened dropdown', scope.isOpenedDropdown);
+        };
         elem.parent().toggleClass('menu__item__dropdown--close');
       });
     }
@@ -559,18 +574,24 @@ angular.module('app').directive('menuDropdown', function() {
 });
 angular.module('app').directive('watchDropdowns', function() {
   return {
+    restrict: 'A',
     link: function(scope, elem, attrs) {
       scope.$watch('closeDropdowns', function(value) {
         var dropdowns = document.querySelectorAll('#main-menu .menu__item__dropdown');
         // console.log('closeDropdowns fired', value);
-        if (value) {
+        if (scope.isOpenedDropdown || scope.closeDropdowns) {
           for (var i = 0; i < dropdowns.length; i++) {
             // console.log('switch off');
             if (!angular.element(dropdowns[i]).hasClass('menu__item__dropdown--close')) {
+              // console.log('closing');
               angular.element(dropdowns[i]).addClass('menu__item__dropdown--close');
+              // scope.$apply;
             }
           }
           scope.closeDropdowns = false;
+          scope.isOpenedDropdown = false;
+          // scope.$apply;
+
           // console.log('turned to false', scope.closeDropdowns);
         }
       });
