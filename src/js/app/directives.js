@@ -44,3 +44,11 @@ angular.module('app').directive('watchDropdowns', function() {
     }
   };
 });
+angular.module('app').directive('accordion', function () {
+  return {
+    restrict: 'A',
+    link: function (scope, elem, attrs) {
+      
+    }
+  };
+});

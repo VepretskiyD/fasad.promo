@@ -9,3 +9,5 @@
 //= app/controllers.js
 ;
 //= app/directives.js
+;
+//= app/factories.js

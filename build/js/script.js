@@ -541,8 +541,14 @@ angular.module('app').controller('WhyUsController', function ($scope) {
 angular.module('app').controller('TechnologyController', function ($scope) {
 
 });
-angular.module('app').controller('GalleryController', function ($scope) {
-
+angular.module('app').controller('GalleryController', function ($scope, $http) {
+  $http.get('js/gallery.json').success(function (data) {
+    $scope.gallery = data;
+    // console.log(service.gallery);
+    // return data;
+  });
+  // $scope.gallery = galleryFactory.getGallery();
+  // console.log($scope.gallery);
 });
 angular.module('app').controller('ContactsController', function ($scope) {
 
@@ -597,4 +603,28 @@ angular.module('app').directive('watchDropdowns', function() {
       });
     }
   };
+});
+angular.module('app').directive('accordion', function () {
+  return {
+    restrict: 'A',
+    link: function (scope, elem, attrs) {
+      
+    }
+  };
+});
+;
+angular.module('app').factory('galleryFactory', function ($http) {
+  var service = {};
+  // var gallery;
+  service.getGallery = function () {
+    $http.get('js/gallery.json').success(function (data) {
+      service.gallery = data;
+      console.log(service.gallery);
+      return data;
+    });
+  }
+
+
+
+  return service;
 });

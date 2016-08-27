@@ -1,7 +1,11 @@
-// $ff-title: Montserrat, sans-serif;
+$ff-title-content: "Montserrat", sans-serif;
 $ff-header-menu: Arial, sans-serif;
 $fz-main: 14px;
-// $ff-content: "Roboto Light", sans-serif;
+$fz-content: 14px;
+$ff-content: "Roboto Light", sans-serif;
+$lh-content: 20px;
+$fz-title-content: $fz-content + 2px;
+$lh-title-content: $fz-title-content + 10px;
 // $red: #ff4e50;
 // $grey: #ccc;
 $header-nav-main: #3f51b5;
@@ -39,4 +43,20 @@ $header-nav-bp-w: 700px;
   @media screen and (min-width: $header-nav-bp-w) {
     @content;
   }
-};
+}
+// $gallery-bp-w: 700px;
+@mixin mq-480 {
+  @media screen and (min-width: 480px) {
+    @content;
+  }
+}
+@mixin mq-720 {
+  @media screen and (min-width: 720px) {
+    @content;
+  }
+}
+@mixin mq-960 {
+  @media screen and (min-width: 960px) {
+    @content;
+  }
+}

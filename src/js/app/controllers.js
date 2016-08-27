@@ -44,8 +44,14 @@ angular.module('app').controller('WhyUsController', function ($scope) {
 angular.module('app').controller('TechnologyController', function ($scope) {
 
 });
-angular.module('app').controller('GalleryController', function ($scope) {
-
+angular.module('app').controller('GalleryController', function ($scope, $http) {
+  $http.get('js/gallery.json').success(function (data) {
+    $scope.gallery = data;
+    // console.log(service.gallery);
+    // return data;
+  });
+  // $scope.gallery = galleryFactory.getGallery();
+  // console.log($scope.gallery);
 });
 angular.module('app').controller('ContactsController', function ($scope) {
 

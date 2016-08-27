@@ -1,0 +1,146 @@
+[{
+    "id": "admin_building_lutsk",
+    "listId": "administrative",
+    "title": "Адміністративна будівля",
+    "location": "м.Луцьк",
+    "url": [
+        "img/gallery/administrative/admin_building_lutsk_1.jpg"
+    ]
+},
+{
+    "id": "admin_building_uzhgorod",
+    "listId": "administrative",
+    "title": "Адміністративна будівля",
+    "location": "м.Ужгород",
+    "url": [
+        "img/gallery/administrative/admin_building_uzhgorod_1.jpg",
+        "img/gallery/administrative/admin_building_uzhgorod_2.jpg"
+    ]
+},
+{
+    "id": "mersedes_lutsk",
+    "listId": "auto",
+    "title": "Автосалон «Mercedes-benz»",
+    "location": "м.Луцьк",
+    "url": [
+        "img/gallery/auto/mersedes_lutsk_1.jpg",
+        "img/gallery/auto/mersedes_lutsk_2.jpg",
+        "img/gallery/auto/mersedes_lutsk_3.jpg",
+        "img/gallery/auto/mersedes_lutsk_4.jpg",
+        "img/gallery/auto/mersedes_lutsk_5.jpg",
+        "img/gallery/auto/mersedes_lutsk_6.jpg",
+        "img/gallery/auto/mersedes_lutsk_7.jpg",
+        "img/gallery/auto/mersedes_lutsk_8.jpg",
+        "img/gallery/auto/mersedes_lutsk_9.jpg"
+    ]
+},
+{
+    "id": "aroma_espresso_bar_kyiv",
+    "listId": "cafe",
+    "title": "Aroma espresso bar",
+    "location": "м.Київ",
+    "url": [
+        "img/gallery/cafe/aroma_espresso_bar_kyiv_1.jpg"
+    ]
+},
+{
+    "id": "mcdonalds_kyiv",
+    "listId": "cafe",
+    "title": "McDonald’s",
+    "location": "м.Київ",
+    "url": [
+        "img/gallery/cafe/mcdonalds_kyiv_1.jpg",
+        "img/gallery/cafe/mcdonalds_kyiv_2.jpg"
+    ]
+},
+{
+    "id": "skf_factory_lutsk",
+    "listId": "factory",
+    "title": "Завод «SKF»",
+    "location": "м.Луцьк",
+    "url": [
+        "img/gallery/factory/skf_factory_lutsk_1.jpg"
+    ]
+},
+{
+    "id": "hotel_zakarpatya_1",
+    "listId": "hotel",
+    "title": "Готельний комплекс",
+    "location": "Закарпаття",
+    "url": [
+        "img/gallery/hotel/hotel_zakarpatya_1_1.jpg",
+        "img/gallery/hotel/hotel_zakarpatya_1_2.jpg",
+        "img/gallery/hotel/hotel_zakarpatya_1_3.jpg"
+    ]
+},
+{
+    "id": "hotel_zakarpatya_2",
+    "listId": "hotel",
+    "title": "Готельний комплекс",
+    "location": "Закарпаття",
+    "url": [
+        "img/gallery/hotel/hotel_zakarpatya_2_1.jpg",
+        "img/gallery/hotel/hotel_zakarpatya_2_2.jpg",
+        "img/gallery/hotel/hotel_zakarpatya_2_3.jpg",
+        "img/gallery/hotel/hotel_zakarpatya_2_4.jpg"
+    ]
+},
+{
+    "id": "penthouse_donetsk",
+    "listId": "hotel",
+    "title": "Пентхаус",
+    "location": "м.Донецьк",
+    "url": [
+        "img/gallery/hotel/penthouse_donetsk_1.jpg"
+    ]
+},
+{
+    "id": "grand_volyn_lutsk",
+    "listId": "mall",
+    "title": "ТРЦ «Гранд Волинь»",
+    "location": "м.Луцьк",
+    "url": [
+        "img/gallery/mall/grand_volyn_lutsk_1.jpg"
+    ]
+},
+{
+    "id": "port_city_lutsk",
+    "listId": "mall",
+    "title": "ТРЦ «ПОРТ City»",
+    "location": "м.Луцьк",
+    "url": [
+        "img/gallery/mall/port_city_lutsk_1.jpg",
+        "img/gallery/mall/port_city_lutsk_2.jpg"
+    ]
+},
+{
+    "id": "varshavsky_lutsk",
+    "listId": "mall",
+    "title": "ТРЦ «Варшавський»",
+    "location": "м.Луцьк",
+    "url": [
+        "img/gallery/mall/varshavsky_lutsk_1.jpg"
+    ]
+},
+{
+    "id": "university_of_law_kyiv",
+    "listId": "social",
+    "title": "Університет права",
+    "location": "м.Київ",
+    "url": [
+        "img/gallery/social/university_of_law_kyiv_1.jpg",
+        "img/gallery/social/university_of_law_kyiv_2.jpg",
+        "img/gallery/social/university_of_law_kyiv_3.jpg"
+    ]
+},
+{
+    "id": "zoo_lutsk",
+    "listId": "social",
+    "title": "Зоопарк",
+    "location": "м.Луцьк",
+    "url": [
+        "img/gallery/social/zoo_lutsk_1.jpg"
+    ]
+}
+
+]

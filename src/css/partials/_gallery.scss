@@ -1,0 +1,21 @@
+.gallery {
+  &__item {
+    width: 100%;
+    @include mq-480 {
+      width: 50%;
+      float: left;
+      box-sizing: border-box;
+      padding: 5px;
+    }
+    @include mq-720 {
+      width: calc(100%/3);
+    }
+    @include mq-960 {
+      width: 25%;
+    }
+    &__img {
+      width: 100%;
+    }
+    transition: width 1s;
+  }
+}
