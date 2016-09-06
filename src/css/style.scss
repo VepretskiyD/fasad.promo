@@ -52,6 +52,7 @@ body {
   right: 0;
   overflow: hidden;
   display: block;
+  z-index: 999;
   @include header-nav-bp {
     width: auto;
     overflow: visible;

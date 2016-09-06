@@ -1,4 +1,4 @@
-angular.module('app', ['ngRoute', 'angular-click-outside']);
+angular.module('app', ['ngRoute', 'angular-click-outside', 'masonry']);
 angular.module('app').run(function ($rootScope, $location) {
   $rootScope.$on('$routeChangeSuccess', function (event, current, previous, reject) {
     // console.log(current);
