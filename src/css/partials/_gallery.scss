@@ -1,21 +1,74 @@
 .gallery {
   &__item {
+    font-family: $ff-content;
+    font-size: 14px;
     width: 100%;
+    height: 296px;
+    box-sizing: border-box;
+    padding: 5px;
+
+
+
     @include mq-480 {
       width: 50%;
-      box-sizing: border-box;
-      padding: 5px;
+      height: 208px;
     }
     @include mq-720 {
       width: calc(100%/3);
+      height: 195px;
     }
     @include mq-960 {
       width: 25%;
+      height: 192px;
+    }
+    &__inner {
+      display: block;
+      position: relative;
+      width: 100%;
+      height: 100%;
+      box-sizing: border-box;
+      // padding: 5px;
+      border: 1px solid grey;
+      border-radius: 5px;
+      overflow: hidden;
+      background-position: center;
+      background-size: cover;
+      &:hover {
+        box-shadow: 0 0 6px 3px rgba(0, 0, 0, 0.63);
+        transition: box-shadow 0.4s;
+      }
     }
     &__img {
       width: 100%;
+      display: block;
     }
-    // transition: width 1s;
+    &__title {
+      box-sizing: border-box;
+      padding: 5px;
+      // line-height: 30px;
+      position: absolute;
+      left: 0;
+      top: 0;
+      color: #fff;
+      background: rgba(0, 0, 0, 0.5);
+      border-radius: 0 0 10px 0;
+      .fa {
+        padding: 0 5px;
+      }
+    }
+    &__location {
+      color: #fff;
+      background: rgba(0, 0, 0, 0.5);
+      box-sizing: border-box;
+      padding: 5px;
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      border-radius: 10px 0 0 0;
+      .fa {
+        padding: 0 5px;
+      }
+    }
   }
   &__btn {
     cursor: pointer;

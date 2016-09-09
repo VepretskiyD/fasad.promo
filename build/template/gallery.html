@@ -13,8 +13,11 @@
 </div>
 <div class="gallery clearfix" masonry='{ "transitionDuration" : "0.4s" , "itemSelector" : ".tile"}'>
   <div masonry-tile class="gallery__item tile" ng-repeat="gallery_item in gallery | filter:filterByFilteredList | orderBy:propertyName:reverse">
-    <img class="gallery__item__img" ng-src="{{gallery_item.url[0]}}" alt="">
-    <p class="gallery__item__title">{{gallery_item.title}}</p>
-    <p class="gallery__item__location">{{gallery_item.location}}</p>
+    <a href="#/gallery/{{gallery_item.id}}" class="gallery__item__inner" style="background-image: url( {{gallery_item.url[0]}} );">
+
+      <!-- <img class="gallery__item__img" src="{{gallery_item.url[0]}}" alt=""> -->
+      <p class="gallery__item__title">{{gallery_item.title}}<i class="fa fa-briefcase" aria-hidden="true"></i></p>
+      <p class="gallery__item__location"><i class="fa fa-map-marker" aria-hidden="true"></i>{{gallery_item.location}}</p>
+    </a>
   </div>
 </div>
