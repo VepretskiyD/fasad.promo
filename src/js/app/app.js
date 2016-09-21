@@ -1,16 +1,18 @@
 angular.module('app', ['ngRoute', 'angular-click-outside', 'masonry']);
 angular.module('app').run(function ($rootScope, $location) {
   $rootScope.$on('$routeChangeSuccess', function (event, current, previous, reject) {
-    // console.log(current);
+    // saving current route/location in global scope
     if(current.$$route) {
       $rootScope.currentOriginalPath = current.$$route.originalPath;
       $rootScope.currentPath = $location.path();
+    };
+    // checking when gallery state needs to be cached. it happens when we going to gallery from gallery item
+    if(previous && previous.$$route.controller == 'GalleryItemController' && current.$$route.controller == 'GalleryController') {
+      $rootScope.cachedGallery = true;
+    } else {
+      $rootScope.cachedGallery = false;
     }
   });
-  // $rootScope.$on('$locationChangeSuccess', function (event, next, current) {
-    // $rootScope.currentPath = next;
-    // console.log('location changed ', $location.path());
-  // })
 });
 angular.module('app').config(['$routeProvider', function ($routeProvide) {
   $routeProvide.
@@ -36,6 +38,10 @@ angular.module('app').config(['$routeProvider', function ($routeProvide) {
     when('/gallery', {
       templateUrl: 'template/gallery.html',
       controller: 'GalleryController'
+    }).
+    when('/gallery/:galleryItemId', {
+      templateUrl: 'template/galleryitem.html',
+      controller: 'GalleryItemController'
     }).
     when('/contacts', {
       templateUrl: 'template/contacts.html',

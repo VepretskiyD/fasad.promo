@@ -31994,16 +31994,18 @@ n&&(l[m.name]=n)}q=l}else q=null;else q=null;q=a=q}q&&(b=t(c,{params:d.extend({}
 angular.module('app', ['ngRoute', 'angular-click-outside', 'masonry']);
 angular.module('app').run(function ($rootScope, $location) {
   $rootScope.$on('$routeChangeSuccess', function (event, current, previous, reject) {
-    // console.log(current);
+    // saving current route/location in global scope
     if(current.$$route) {
       $rootScope.currentOriginalPath = current.$$route.originalPath;
       $rootScope.currentPath = $location.path();
+    };
+    // checking when gallery state needs to be cached. it happens when we going to gallery from gallery item
+    if(previous && previous.$$route.controller == 'GalleryItemController' && current.$$route.controller == 'GalleryController') {
+      $rootScope.cachedGallery = true;
+    } else {
+      $rootScope.cachedGallery = false;
     }
   });
-  // $rootScope.$on('$locationChangeSuccess', function (event, next, current) {
-    // $rootScope.currentPath = next;
-    // console.log('location changed ', $location.path());
-  // })
 });
 angular.module('app').config(['$routeProvider', function ($routeProvide) {
   $routeProvide.
@@ -32030,6 +32032,10 @@ angular.module('app').config(['$routeProvider', function ($routeProvide) {
       templateUrl: 'template/gallery.html',
       controller: 'GalleryController'
     }).
+    when('/gallery/:galleryItemId', {
+      templateUrl: 'template/galleryitem.html',
+      controller: 'GalleryItemController'
+    }).
     when('/contacts', {
       templateUrl: 'template/contacts.html',
       controller: 'ContactsController'
@@ -32044,12 +32050,14 @@ angular.module('app').config(['$routeProvider', function ($routeProvide) {
 }]);
 ;
 angular.module('app').controller('MainMenuController', function ($scope, $rootScope, $location) {
+  // switching main menu
   $scope.toggleMenu = function () {
     $scope.showMenu = !$scope.showMenu;
     if (!$scope.showMenu) {
       $scope.closeThis();
     }
-  }
+  };
+  // closing the main menu and all dropdowns
   $scope.closeThis = function () {
     if ($scope.isOpenedDropdown || $scope.showMenu) {
 
@@ -32057,6 +32065,7 @@ angular.module('app').controller('MainMenuController', function ($scope, $rootSc
       $scope.closeDropdowns = true;
     }
   };
+  // checking for ng-class for main menu item
   $scope.isActive = function (page) {
     var currentLocation = $location.path();
     var currentRoute = $rootScope.currentOriginalPath;
@@ -32066,6 +32075,7 @@ angular.module('app').controller('MainMenuController', function ($scope, $rootSc
       return false;
     };
   };
+  // closing main menu and all dropdowns on route/location change
   $rootScope.$watch('currentPath', function (val) {
     $scope.closeThis();
   })
@@ -32079,13 +32089,15 @@ angular.module('app').controller('AboutController', function ($scope) {
 angular.module('app').controller('WhyUsController', function ($scope) {
 
 });
-angular.module('app').controller('TechnologyController', function ($scope) {
-
+angular.module('app').controller('TechnologyController', function ($scope, $routeParams) {
+  $scope.techId = $routeParams.techId;
 });
-angular.module('app').controller('GalleryController', function ($scope, $http) {
+angular.module('app').controller('GalleryController', function ($scope, $rootScope, $http, galleryFactory) {
+  // retriving gallery form JSON
   $http.get('js/gallery.json').success(function (data) {
     $scope.gallery = data;
     $scope.listOfListId = [];
+    // gathering the list of items id's
     angular.forEach($scope.gallery, function (item) {
       var self = this;
       if (self.indexOf(item.listId) < 0) {
@@ -32093,35 +32105,60 @@ angular.module('app').controller('GalleryController', function ($scope, $http) {
       };
     }, $scope.listOfListId);
   });
-  $scope.propertyName = 'title';
-  $scope.reverse = false;
+  // caching filtered list in gallery factory
+  function setFilteredList () {
+    galleryFactory.setFilteredList($scope.filteredList);
+  };
+  // caching sort name and direction in gallery factory
+  function setSortBy () {
+    galleryFactory.setSortBy($scope.propertyName, $scope.reverse);
+  };
+  // If previous page was gallery item page then we restore previous state of gallery from cache variables in gallery factory
+  if ($rootScope.cachedGallery) {
+    $scope.filteredList = galleryFactory.getFilteredList();
+    $scope.propertyName = galleryFactory.getSotrBy().name;
+    $scope.reverse = galleryFactory.getSotrBy().reverse;
+  } else {
+    $scope.filteredList = [];
+    $scope.propertyName = 'title';
+    $scope.reverse = false;
+    setFilteredList();
+    setSortBy();
+  };
+  // gallery sort by
   $scope.sortBy = function(propertyName) {
     $scope.reverse = ($scope.propertyName === propertyName) ? !$scope.reverse : false;
     $scope.propertyName = propertyName;
+    setSortBy();
   };
-  $scope.filteredList = [];
+  // Filter for gallery images. Two-way depending between buttons and gallery images
   $scope.filterBy = function (filterName) {
     if (filterName === 'showAll') {
       $scope.filteredList = [];
+      setFilteredList();
       return;
     };
     if (filterName === 'hideAll') {
       $scope.filteredList = $scope.listOfListId.slice();
+      setFilteredList();
       return;
     };
     var index = $scope.filteredList.indexOf(filterName);
     if (index < 0) {
       $scope.filteredList.push(filterName);
+      setFilteredList();
     } else {
       $scope.filteredList.splice(index, 1);
+      setFilteredList();
     };
   };
+  // Custom controller's filter
   $scope.filterByFilteredList = function (listItem) {
-    // console.log(listItem.listId);
     if ($scope.filteredList.indexOf(listItem.listId) < 0) {
       return listItem;
     };
   };
+  // Defines ng-class for filtering buttons
   $scope.galleryBtnFilterIsActive = function(filterName) {
     if ($scope.filteredList.indexOf(filterName) < 0) {
       return true;
@@ -32130,6 +32167,9 @@ angular.module('app').controller('GalleryController', function ($scope, $http) {
     }
   }
 
+});
+angular.module('app').controller('GalleryItemController', function ($scope, $routeParams, galleryFactory) {
+  $scope.galleryItemId = $routeParams.galleryItemId;
 });
 angular.module('app').controller('ContactsController', function ($scope) {
 
@@ -32196,16 +32236,27 @@ angular.module('app').directive('accordion', function () {
 ;
 angular.module('app').factory('galleryFactory', function ($http) {
   var service = {};
-  // var gallery;
-  service.getGallery = function () {
-    $http.get('js/gallery.json').success(function (data) {
-      service.gallery = data;
-      console.log(service.gallery);
-      return data;
-    });
-  }
-
-
-
+  // caches the gallery state, filtered and sortered array
+  var filteredList = [];
+  var name;
+  var reverse;
+  // getters
+service.getFilteredList = function () {
+  return filteredList;
+};
+service.getSotrBy = function () {
+  return {
+    'name': name,
+    'reverse': reverse
+  };
+};
+// setters
+service.setFilteredList = function (list) {
+  filteredList = list;
+};
+service.setSortBy = function (newName, newReverse) {
+  name = newName;
+  reverse = newReverse;
+};
   return service;
 });
